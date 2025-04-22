@@ -1,11 +1,94 @@
 ---
-title: "nba"
+title: "NBA_WEB"
 ---
 
-This is a Quarto website.
+title: "NBA Player Performance Analysis"
+author: "Sneha Agrawal"
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+
+# Main Objective
+
+Explore if playoff participation impacts player performance (GmSc)
+
+Examine whether total rebounds relate to points scored (PTS)
+
+
+# Audience
+
+NBA Coaches & Analysts
+
+Fantasy Basketball Players
+
+Sports Fans & Stat Enthusiasts
+
+
+#Initial EDA – Boxplot
+
+Game Score (GmSc) by Playoff Participation
 
 ```{r}
-1 + 1
+library(readr)
+library(ggplot2)
+
+
+nba_data <- read_csv("C:/Statistics/nba.csv")
+
+
+ggplot(nba_data, aes(x = factor(Playoffs), y = GmSc, fill = factor(Playoffs))) +
+  geom_boxplot() +
+  labs(title = "Game Score (GmSc) Distribution by Playoff Status",
+       x = "Playoff Participation (0 = No, 1 = Yes)",
+       y = "Game Score (GmSc)") +
+  theme_minimal()
+
 ```
+
+# Playoff players show higher and more varied Game Scores.
+
+
+
+
+##Scatter Plot – Rebounds vs Points
+
+Correlation Between Total Rebounds (TRB) and Points Scored (PTS)
+
+```{r}
+
+ggplot(nba_data, aes(x = TRB, y = PTS)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", col = "blue") +
+  labs(title = "Correlation Between Total Rebounds and Points Scored",
+       x = "Total Rebounds (TRB)",
+       y = "Points Scored (PTS)") +
+  theme_minimal()
+
+```
+#Weak but statistically significant correlation (r ≈ 0.091, p = 0.000161)
+
+#Hypothesis Test: GmSc
+
+H₀: No difference in GmSc between playoff and non-playoff playersH₁: There is a significant difference
+
+p-value < 0.05 → Reject H₀
+
+✅ Playoff participation correlates with higher performance
+
+
+#Interpretation – Correlation
+
+Pearson r = 0.091 → weak positive correlation
+
+p = 0.000161 → statistically significant
+
+Players with more rebounds tend to score slightly more points
+
+#Conclusions
+
+Playoff players have higher Game Scores
+
+Rebounding has a weak but significant impact on scoring
+
+Actionable Insight: Prioritize playoff experience and multi-metric evaluation
+
+
+

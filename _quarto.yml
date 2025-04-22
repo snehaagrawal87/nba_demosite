@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "nba"
+  title: "NBA_WEB"
   navbar:
     left:
       - href: index.qmd
